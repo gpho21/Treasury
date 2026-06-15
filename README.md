@@ -93,57 +93,21 @@ ttb-label-verifier/
   single-call-per-label design is the main lever for keeping this fast.
 - No authentication, audit trail, or write-back to any system of record.
 
----
+## Summary
 
-## Running it locally
-
-```bash
-npm install
-npm run dev
-```
-
-`npm run dev` serves the front end, but `/api/analyze` won't work without a
-function runtime. For full local testing (front end + serverless function
-together), use the Vercel CLI instead:
-
-```bash
-npm install -g vercel
-vercel dev
-```
-
-Either way, create a `.env` file (copy `.env.example`) with your own
-`ANTHROPIC_API_KEY` for local testing.
-
-## Deploying to Vercel (get a shareable URL)
-
-1. Push this project to a GitHub repository.
-2. Go to [vercel.com](https://vercel.com), sign in, and click **Add New →
-   Project**, then import that repository. Vercel auto-detects the Vite
-   framework and the `api/` folder.
-3. Before deploying, add an environment variable:
-   - **Name:** `ANTHROPIC_API_KEY`
-   - **Value:** your Anthropic API key
-4. Click **Deploy**. Vercel will give you a URL like
-   `https://your-project-name.vercel.app` — that's the link to share.
-
-Any time you push a new commit, Vercel redeploys automatically.
-
-## Deploying to Netlify (alternative)
-
-Netlify works the same way, with two differences:
-- Move `api/analyze.js` to `netlify/functions/analyze.js` and add a redirect
-  in `netlify.toml`:
-  ```toml
-  [[redirects]]
-    from = "/api/analyze"
-    to = "/.netlify/functions/analyze"
-    status = 200
-  ```
-- Set `ANTHROPIC_API_KEY` under **Site settings → Environment variables**.
-
-## Notes on the API key
-
-Never commit a real API key to the repository or put it in front-end code —
-that would expose it to anyone who opens the site. The serverless function in
-`api/analyze.js` is what keeps it private; the browser only ever talks to
-your own `/api/analyze` endpoint.
+A React/Vite app where an agent enters a label’s application data (Brand
+Name, Class/Type, Alcohol Content, Net Contents) and uploads a photo. The
+photo is sent to Claude for text extraction, then compared field-by-field
+against the application data, plus a strict check of the Government Warning
+statement (wording, caps, bold). Results are shown as a stamp (Verified /
+Needs Review / Rejected) with a per-field breakdown. A batch mode runs this
+for multiple labels at once.
+Tools used
+	•	React + Vite, plain CSS
+	•	Anthropic API (claude-sonnet-4-6) via a serverless function (api/analyze.js)
+	•	Deployed to Vercel
+Assumptions
+	•	Standalone prototype, not integrated with COLA or case management systems
+	•	No data is stored or logged; everything is per-session
+	•	Only the four core fields plus the Government Warning are checked; other
+label elements are out of scope
