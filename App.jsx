@@ -10,6 +10,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 // ---------------------------------------------------------------------------
 // Reference data
@@ -861,6 +862,7 @@ export default function App() {
           Prototype only — nothing entered here is saved or sent anywhere except to the AI model for label analysis.
         </p>
       </main>
+      <Analytics />
     </div>
   );
 }
