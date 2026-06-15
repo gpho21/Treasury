@@ -95,19 +95,18 @@ ttb-label-verifier/
 
 ## Summary
 
-A React/Vite app where an agent enters a label’s application data (Brand
-Name, Class/Type, Alcohol Content, Net Contents) and uploads a photo. The
-photo is sent to Claude for text extraction, then compared field-by-field
-against the application data, plus a strict check of the Government Warning
-statement (wording, caps, bold). Results are shown as a stamp (Verified /
-Needs Review / Rejected) with a per-field breakdown. A batch mode runs this
-for multiple labels at once.
-Tools used
-	•	React + Vite, plain CSS
-	•	Anthropic API (claude-sonnet-4-6) via a serverless function (api/analyze.js)
-	•	Deployed to Vercel
-Assumptions
-	•	Standalone prototype, not integrated with COLA or case management systems
-	•	No data is stored or logged; everything is per-session
-	•	Only the four core fields plus the Government Warning are checked; other
-label elements are out of scope
+- A React/Vite app where an agent enters a label's application data (Brand Name, Class/Type, Alcohol Content, Net Contents) and uploads a photo. The photo is sent to Claude for text extraction, then compared field-by-field against the application data, plus a strict check of the Government Warning statement (wording, caps, bold). Results are shown as a stamp (Verified / Needs Review / Rejected) with a per-field breakdown. A batch mode runs this for multiple labels at once.
+
+**Tools used**
+
+- React + Vite, plain CSS
+- Anthropic API (`claude-sonnet-4-6`) via a serverless function (`api/analyze.js`)
+- Deployed to Vercel
+
+**Assumptions**
+
+- Standalone prototype, not integrated with COLA or case management systems
+- No data is stored or logged; everything is per-session
+- Only the four core fields plus the Government Warning are checked; other label elements are out of scope
+
+
